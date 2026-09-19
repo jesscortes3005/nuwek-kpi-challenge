@@ -1,0 +1,219 @@
+id_venta,fecha,vendedor,region,producto,monto,estatus
+V0120,2026-04-17,Ana López, Bajío ,Implementación,20591.14,Abierto
+V0042,2026-04-05 00:00:00,Efraín Soto,Sur,Consultoría, 36010.45 ,Cerrada
+V0089,2026-06-10,Efraín Soto,sur,Soporte Anual,"60,901.75",  cerrada  
+V0174,04-03-2026,Iván Mora,SUR,Licencia Pro,"83,239.45",cerrada
+V0198,2026-02-19 00:00:00,Iván Mora,Sur,Consultoría,16593.61,Cancelada
+V0037,2026-01-17,Efraín Soto, Bajío ,Soporte Anual,"$82,482.90",cancelada
+V0097,2026-03-15,Diana Pérez,BAJÍO,Implementación, 56441.32 ,  cancelada  
+V0024,2026-03-20,Efraín Soto,NORTE,Módulo Extra,"54608,19",cancelada
+V0014,2026-05-27,Luis Tovar,Norte,Licencia Básica,47565.21,CANCELADA
+V0076,2026-01-26 00:00:00,Héctor Ramos, Norte ,Consultoría,72 760.95,CERRADA
+V0089,10-06-2026,Efraín Soto, Sur ,Soporte Anual,"60901,75",  cerrada  
+V0153,2026-04-15 00:00:00,Mariana Vega,Sur,Módulo Extra,"27,667.98",  abierta  
+V0030,2026-01-26 00:00:00,Mariana Vega,Occidente,Consultoría,86 779.55,cerrada
+V0001,2026-06-07,Diana Pérez, Sur ,Soporte Anual, 53474.92 ,Cerrada
+V0038,2026-05-02,Iván Mora,Bajío,Soporte Anual,40604.36,abierta
+V0186,27/03/2026,Diana Pérez, Occidente ,Módulo Extra, 94268.24 ,abierta
+V0050,26-05-2026,Iván Mora,sur,Implementación,4 340.10,Abierto
+V0051,16/02/2026,Carlos Ruiz,Occidente,Licencia Enterprise,"69506,17",Abierto
+V0044,22/01/2026,Luis Tovar,norte,Licencia Básica,"19,282.54",  cerrada  
+V0074,2026-01-14 00:00:00,Gabriela Nava,Centro,Módulo Extra,"10060,87",Cerrada
+V0152,2026-03-08,Iván Mora,OCCIDENTE,Licencia Básica,"$44,705.80",  cerrada  
+V0041,18/03/2026,Iván Mora,Occidente,Licencia Básica,43409.77,CERRADA
+V0026,2026-01-06 00:00:00,, Norte ,Licencia Pro, 75055.41 ,abierta
+V0143,2026-01-28,Iván Mora,CENTRO,Consultoría,33101.65,cerrada
+V0121,2026-04-13,Mariana Vega,sur,Licencia Pro,10448.68,abierta
+V0181,2026-04-28,Mariana Vega,bajío,Soporte Anual,84087.91,cancelada
+V0185,2026-06-04,Mariana Vega,norte,Licencia Básica,27115.12,  abierta  
+V0129,15-04-2026,Héctor Ramos,Occidente,Módulo Extra,"$66,757.76",cancelada
+V0137,2026-02-11,Héctor Ramos,Sur,Licencia Enterprise,34 143.35,  cerrada  
+V0063,2026-03-25,Diana Pérez,OCCIDENTE,Capacitación,4 027.40,CERRADA
+V0200,2026-03-01,Héctor Ramos,Norte,Implementación,13175.54,Cancelado
+V0131,12-05-2026,Gabriela Nava,Occidente,Licencia Pro,32166.77,Abierto
+V0190,2026-05-24,Diana Pérez, Centro ,Consultoría,12558.49,cerrada
+V0175,10-06-2026,Julia Castro,Occidente,Licencia Básica,"$64,865.17",CERRADA
+V0065,16-06-2026,Ana López,Occidente,Licencia Pro,9630.33,Abierto
+V0029,25-06-2026,Ana López,SUR,Licencia Básica,23535.09,  abierta  
+V0080,2026-02-27,Efraín Soto,,Soporte Anual,54681.36,Abierto
+V0036,2026-05-22,Carlos Ruiz,CENTRO,Implementación,32 244.71,CANCELADA
+V0156,21-02-2026,Gabriela Nava, Occidente ,Consultoría,80 865.32,  cancelada  
+V0086,2026-06-25 00:00:00,Héctor Ramos, Occidente ,Consultoría,"51668,24",Cerrado
+V0169,14-03-2026,Efraín Soto,SUR,Consultoría,"62357,17",Cerrada
+V0066,2026-02-15,Héctor Ramos, Occidente ,Licencia Pro, 90341.51 ,  cerrada  
+V0155,2026-06-17,Iván Mora, Norte ,Licencia Básica,"$65,010.27",CERRADA
+V0194,2026-03-02,Diana Pérez,Occidente,Licencia Pro, 32655.84 ,cerrada
+V0106,2026-04-12,Gabriela Nava, Centro ,Licencia Pro,"$23,494.72",Cancelado
+V0145,26/04/2026,Carlos Ruiz, Bajío ,Licencia Enterprise,"$63,839.96",Cerrado
+V0117,2026-04-22,Luis Tovar,Bajío,Licencia Enterprise,"65,625.36",  cerrada  
+V0099,2026-01-20 00:00:00,Iván Mora, Sur ,Soporte Anual,50 129.58,Cerrado
+V0022,05-05-2026,Mariana Vega,Centro,Licencia Pro,84163.82,Cerrado
+V0067,2026-02-16,Mariana Vega, Centro ,Módulo Extra,"72464,87",Cerrada
+V0005,01/02/2026,Gabriela Nava,Norte,Módulo Extra,69724.54,abierta
+V0170,2026-06-15,Luis Tovar,Sur,Soporte Anual,50800.67,Abierta
+V0126,2026-01-31,Ana López,centro,Soporte Anual,2022.74,  abierta  
+V0160,2026-06-07,Ana López, Centro ,Licencia Pro,14257.66,CERRADA
+V0095,27-04-2026,Luis Tovar,Occidente,Implementación, 6332.49 ,cerrada
+V0105,08/01/2026,Ana López,NORTE,Licencia Básica,"35673,73",cerrada
+V0052,2026-06-22,Julia Castro,occidente,Capacitación,26551.87,abierta
+V0011,2026-06-26,Gabriela Nava,norte,Soporte Anual,"47,201.63",  cerrada  
+V0177,20/01/2026,Iván Mora,Centro,Capacitación,84284.99,Cerrada
+V0006,2026-06-09,Luis Tovar, Centro ,Capacitación,"25269,20",CERRADA
+V0191,2026-05-26,Diana Pérez,CENTRO,Módulo Extra,35 902.40,ABIERTA
+V0025,2026-02-28,Julia Castro,Bajío,Implementación,25371.34,Cerrado
+V0088,2026-05-09,Ana López,Sur,Soporte Anual,3915.05,Abierto
+V0187,2026-02-28,Luis Tovar,norte,Licencia Pro, 9228.69 ,cerrada
+V0196,2026-03-23 00:00:00,Julia Castro,BAJÍO,Licencia Pro,"21885,68",  cerrada  
+V0150,29-01-2026,Mariana Vega,Sur,Capacitación, 63506.83 ,CERRADA
+V0078,23-03-2026,Gabriela Nava,NORTE,Módulo Extra, 64397.89 ,Cancelado
+V0113,2026-04-06,Héctor Ramos,Occidente,Soporte Anual,89989.53,cancelada
+V0062,2026-06-21,Carlos Ruiz,,Licencia Pro,77615.31,Abierta
+V0047,2026-05-16,Iván Mora,NORTE,Módulo Extra,"$34,655.91",cerrada
+V0161,09/03/2026,Efraín Soto,sur,Licencia Básica,"$71,667.61",Abierto
+V0157,2026-03-17,Efraín Soto,Centro,Licencia Básica,"3274,99",Cerrada
+V0148,2026-06-18,Gabriela Nava,Sur,Soporte Anual,"6,370.35",CERRADA
+V0054,2026-01-19,Efraín Soto,Sur,Licencia Enterprise,3922.46,Cerrada
+V0128,2026-04-25,Diana Pérez,Occidente,Licencia Básica,11 002.13,  cerrada  
+V0043,2026-02-02 00:00:00,Mariana Vega,norte,Consultoría, 74483.07 ,CANCELADA
+V0034,2026-03-31,Ana López,Bajío,Consultoría,"23,662.28",Abierto
+V0193,2026-06-20,Ana López,Centro,Licencia Básica,"$30,092.91",  abierta  
+V0094,07/02/2026,Carlos Ruiz,BAJÍO,Licencia Pro,50223.28,cerrada
+V0114,2026-06-04,Julia Castro,CENTRO,Licencia Básica,"$72,085.38",CERRADA
+V0077,2026-02-07,Mariana Vega,Bajío,Implementación,38 870.41,CERRADA
+V0151,14-06-2026,Luis Tovar,sur,Módulo Extra,"51,383.23",Abierto
+V0116,2026-02-28,Gabriela Nava,,Capacitación,19740.78,abierta
+V0189,19-06-2026,Ana López, Centro ,Capacitación,"64,073.57",Abierto
+V0109,23-04-2026,Mariana Vega, Bajío ,Soporte Anual,"31918,27",Abierta
+V0142,19/03/2026,Iván Mora,BAJÍO,Capacitación,"68383,62",  cancelada  
+V0096,2026-02-17,, Bajío ,Implementación,90 579.09,CERRADA
+V0039,25-02-2026,Iván Mora,Bajío,Licencia Enterprise, 39910.22 ,cancelada
+V0183,2026-04-22,Mariana Vega,sur,Soporte Anual,abc,Cerrada
+V0182,2026-06-26,Carlos Ruiz,Bajío,Implementación,35 352.93,Cerrado
+V0083,2026-03-15,, Occidente ,Implementación,77796.22,Cerrada
+V0166,2026-06-03,Diana Pérez,norte,Consultoría,31 480.33,cerrada
+V0063,2026-03-25 00:00:00,Diana Pérez, Occidente ,Capacitación,"$4,027.40",Cerrado
+V0058,2026-05-24,Efraín Soto,CENTRO,Consultoría,"58,755.28",cancelada
+V0075,2026-05-19,Gabriela Nava,Norte,Módulo Extra,"$36,708.09",Abierto
+V0060,21/01/2026,Diana Pérez,sur,Implementación,"$9,688.64",abierta
+V0059,2026-03-21,Diana Pérez,Occidente,Soporte Anual,60652.15,Cancelado
+V0046,2026-13-45,Luis Tovar,Occidente,Licencia Enterprise,"47,534.63",CERRADA
+V0188,2026-04-29,Iván Mora,Bajío,Licencia Enterprise,"$6,292.69",cancelada
+V0107,16-04-2026,Ana López,bajío,Licencia Enterprise, 79055.28 ,ABIERTA
+V0158,2026-03-30,Julia Castro,Sur,Capacitación,"85779,35",cerrada
+V0140,2026-06-03,Héctor Ramos, Bajío ,Licencia Pro,"21742,23",cerrada
+V0056,2026-05-04,Héctor Ramos,Occidente,Licencia Pro,,cerrada
+V0070,2026-03-20,Iván Mora,Bajío,Soporte Anual,"79357,85",cancelada
+V0044,2026-01-22,Luis Tovar,NORTE,Licencia Básica,19282.54,cerrada
+V0098,2026-06-12 00:00:00,Julia Castro,Occidente,Licencia Pro,60 366.16,Cerrada
+V0028,2026-03-31 00:00:00,Luis Tovar,NORTE,Licencia Pro, 76812.31 ,Cerrada
+V0048,25-02-2026,Mariana Vega,Bajío,Módulo Extra,76880.51,  cerrada  
+V0027,05/05/2026,Ana López,Centro,Licencia Básica,16 895.34,cancelada
+V0124,01-02-2026,Diana Pérez,norte,Capacitación,"$94,837.71",  abierta  
+V0147,2026-04-25,Efraín Soto,sur,Módulo Extra,56971.27,cerrada
+V0003,14-05-2026,Efraín Soto,CENTRO,Módulo Extra,"85,419.39",cerrada
+V0009,07-05-2026,Ana López,Norte,Licencia Básica,"$91,225.35",Cerrado
+V0040,2026-05-08 00:00:00,Héctor Ramos,Norte,Licencia Pro,"$10,349.72",cerrada
+V0008,2026-02-25,Héctor Ramos, Bajío ,Soporte Anual,69122.34,abierta
+V0076,26/01/2026,Héctor Ramos,Norte,Consultoría,"72760,95",Cerrado
+V0173,17/05/2026,Gabriela Nava,norte,Licencia Pro,25 674.31,Cerrado
+V0142,2026-03-19,Iván Mora,Bajío,Capacitación,"$68,383.62",Cancelado
+V0161,2026-03-09,Efraín Soto,SUR,Licencia Básica,71667.61,abierta
+V0135,2026-03-19,Héctor Ramos,Centro,Capacitación, 53101.88 ,CERRADA
+V0127,2026-04-20,Iván Mora,occidente,Licencia Básica, 3385.70 ,Cerrado
+V0118,2026-05-03,Gabriela Nava,Occidente,Módulo Extra, 63657.42 ,CANCELADA
+V0115,2026-04-02,Mariana Vega,Norte,Licencia Pro,13 661.87,Cancelada
+V0090,07/06/2026,Luis Tovar,Occidente,Capacitación,73927.74,  cerrada  
+V0010,2026-05-21,Gabriela Nava,Norte,Consultoría,"42769,33",Cerrada
+V0045,2026-04-26,Luis Tovar,Norte,Licencia Pro,9918.80,Cerrado
+V0079,2026-01-12 00:00:00,Iván Mora,BAJÍO,Capacitación,"$91,528.55",CANCELADA
+V0111,2026-05-23,Luis Tovar,centro,Licencia Pro,"44,515.65",Abierto
+V0163,2026-05-13,Diana Pérez, Occidente ,Consultoría,26194.19,CERRADA
+V0002,2026-02-06,Héctor Ramos,Bajío,Capacitación,72 328.77,  abierta  
+V0154,2026-01-12,Ana López,Occidente,Implementación,16186.93,Cerrada
+V0082,29/04/2026,Julia Castro, Sur ,Licencia Pro,"89885,04",cancelada
+V0123,2026-05-10,Héctor Ramos,Sur,Licencia Básica,45 909.64,  cerrada  
+V0141,2026-05-03,Carlos Ruiz,Occidente,Soporte Anual,34435.16,CERRADA
+V0023,18-04-2026,Iván Mora,CENTRO,Licencia Pro,15256.57,  cerrada  
+V0110,2026-06-15 00:00:00,Iván Mora,CENTRO,Módulo Extra,"69645,11",  abierta  
+V0100,17-04-2026,Gabriela Nava,Sur,Soporte Anual,52132.62,Cerrado
+V0189,19/06/2026,Ana López, Centro ,Capacitación,"64,073.57",Abierto
+V0020,28-05-2026,Luis Tovar,BAJÍO,Licencia Enterprise,65152.88,abierta
+V0050,26-05-2026,Iván Mora,Sur,Implementación,"$4,340.10",Abierta
+V0132,2026-06-12,Gabriela Nava,centro,Capacitación,"$94,182.18",Cerrado
+V0069,2026-06-02,Carlos Ruiz, Centro ,Licencia Pro,2559.08,ABIERTA
+V0125,2026-05-18 00:00:00,Luis Tovar,norte,Consultoría,"82,343.06",Abierta
+V0018,2026-06-29,Mariana Vega,Centro,Soporte Anual, 86594.94 ,cerrada
+V0012,2026-02-10,Iván Mora,norte,Licencia Pro, 48279.95 ,Cerrada
+V0057,01-02-2026,Ana López, Bajío ,Licencia Pro,"51,500.54",Cerrada
+V0031,2026-04-01,Mariana Vega,Bajío,Implementación,"29064,70",Cancelada
+V0024,20-03-2026,Efraín Soto,norte,Módulo Extra,54 608.19,Cancelada
+V0091,2026-02-26 00:00:00,Carlos Ruiz,Bajío,Soporte Anual,"$18,731.03",cerrada
+V0195,2026-01-27,Ana López,Centro,Capacitación,"$10,825.83",Abierto
+V0013,2026-02-15 00:00:00,Efraín Soto,Norte,Implementación, 53005.40 ,Cancelada
+V0180,2026-04-30,Gabriela Nava,Bajío,Licencia Básica,1 843.56,  cerrada  
+V0171,2026-05-16,Mariana Vega,Norte,Licencia Pro, 91561.50 ,cancelada
+V0085,14/05/2026,Mariana Vega,Centro,Consultoría,"$11,143.20",Cancelada
+V0064,2026-06-10,Mariana Vega,Centro,Licencia Básica,78837.00,ABIERTA
+V0049,2026-01-09,Luis Tovar,Centro,Licencia Pro,"$72,504.84",Cerrada
+V0053,07/06/2026,Diana Pérez, Sur ,Licencia Pro,"$71,074.98",Cerrado
+V0016,2026-04-30,Julia Castro, Centro ,Implementación,"65,820.51",cerrada
+V0184,2026-05-22,Efraín Soto, Sur ,Licencia Básica,-3500.00,  cerrada  
+V0199,2026-02-22,Ana López,Sur,Capacitación,  ,  cerrada  
+V0081,2026-04-04,Efraín Soto,norte,Licencia Enterprise,"$45,615.89",cerrada
+V0167,0000-00-00,Carlos Ruiz,Bajío,Implementación,39613.83,Cerrada
+V0093,2026-05-29,Ana López,Occidente,Licencia Básica,"55,663.59",  abierta  
+V0110,2026-06-15,Iván Mora,Centro,Módulo Extra, 69645.11 ,abierta
+V0139,2026-03-29,Gabriela Nava,Sur,Soporte Anual, 82016.47 ,Cerrada
+V0017,2026-02-06,Luis Tovar,Sur,Capacitación,"4,081.59",CERRADA
+V0099,2026-01-20 00:00:00,Iván Mora,Sur,Soporte Anual,50129.58,cerrada
+V0130,19/04/2026,Diana Pérez,Sur,Implementación,71667.14,  abierta  
+V0084,2026-06-23,Luis Tovar,,Licencia Básica,49011.23,  abierta  
+V0192,25-02-2026,Diana Pérez,Norte,Licencia Básica, 12311.67 ,CERRADA
+V0178,05/04/2026,Héctor Ramos, Bajío ,Implementación,"$67,905.17",Cerrada
+V0108,2026-03-28,Iván Mora,Centro,Implementación,9 570.66,CERRADA
+V0033,2026-01-23,Iván Mora,Bajío,Módulo Extra, 6525.56 ,cancelada
+V0144,2026-05-01,Héctor Ramos,sur,Licencia Básica,88278.13,Cerrada
+V0068,19-06-2026,Efraín Soto,Sur,Soporte Anual,68751.60,abierta
+V0007,17/04/2026,Julia Castro, Centro ,Licencia Básica,"37307,59",  cerrada  
+V0021,2026-06-11 00:00:00,Héctor Ramos,BAJÍO,Módulo Extra,28 550.96,cerrada
+V0066,15/02/2026,Héctor Ramos,occidente,Licencia Pro,"90,341.51",  cerrada  
+V0032,2026-04-23,Mariana Vega,NORTE,Licencia Básica,78 443.11,cancelada
+V0092,,Efraín Soto,Norte,Implementación, 85604.60 ,cancelada
+V0015,2026-04-11,Julia Castro,Centro,Implementación,"27332,55",Cerrado
+V0072,2026-01-13,Ana López,Sur,Consultoría,29065.03,cerrada
+V0112,03/06/2026,Julia Castro,CENTRO,Consultoría,57837.58,Cancelado
+V0061,ayer,Héctor Ramos,Bajío,Módulo Extra,19 618.16,cancelada
+V0104,2026-05-22,Iván Mora,centro,Capacitación, 59010.16 ,cerrada
+V0006,09-06-2026,Luis Tovar, Centro ,Capacitación,"25,269.20",CERRADA
+V0022,05-05-2026,Mariana Vega, Centro ,Licencia Pro,"84,163.82",Cerrado
+V0019,2026-01-21,Carlos Ruiz,Bajío,Implementación,"$6,754.12",CERRADA
+V0055,31/02/2026,Héctor Ramos,Centro,Implementación,"$91,409.91",CERRADA
+V0103,2026-03-15,Iván Mora, Sur ,Módulo Extra,46 636.54,  cerrada  
+V0197,2026-03-14,Julia Castro,Centro,Capacitación,"18,479.80",CERRADA
+V0176,2026/02/30,Mariana Vega,Norte,Licencia Pro,"50,882.73",cancelada
+V0122,2026-04-10,Gabriela Nava,Occidente,Módulo Extra,"42333,49",abierta
+V0162,2026-03-31 00:00:00,Efraín Soto, Bajío ,Soporte Anual,"5320,31",ABIERTA
+V0119,07/06/2026,Diana Pérez,norte,Capacitación,53400.48,cerrada
+V0165,2026-05-07,Iván Mora,OCCIDENTE,Soporte Anual,"21,422.44",cerrada
+V0138,2026-04-09 00:00:00,Diana Pérez,Bajío,Implementación,48 479.26,Cerrado
+V0122,10/04/2026,Gabriela Nava,OCCIDENTE,Módulo Extra,"42333,49",Abierto
+V0146,09-05-2026,Luis Tovar,SUR,Módulo Extra,N/A,Abierto
+V0094,07/02/2026,Carlos Ruiz, Bajío ,Licencia Pro,"50,223.28",Cerrado
+V0071,2026-06-04 00:00:00,Carlos Ruiz, Occidente ,Capacitación,"40002,86",CERRADA
+V0159,2026-02-06 00:00:00,Diana Pérez,Sur,Soporte Anual,"8,344.73",Cerrado
+V0168,2026-05-27,Efraín Soto,Occidente,Módulo Extra,"29414,69",Cerrado
+V0149,2026-04-07,Mariana Vega,occidente,Licencia Pro,"80,452.16",  abierta  
+V0073,2026-05-31 00:00:00,Luis Tovar,Norte,Consultoría,75617.67,Cerrada
+V0136,2026-02-04 00:00:00,Ana López,Norte,Consultoría,28266.87,Cerrado
+V0120,2026-04-17 00:00:00,Ana López, Bajío ,Implementación,"20591,14",  abierta  
+V0007,2026-04-17 00:00:00,Julia Castro,CENTRO,Licencia Básica,37307.59,  cerrada  
+V0172,2026-03-05,Diana Pérez,Occidente,Capacitación,38486.95,Cerrada
+V0133,2026-01-07,Diana Pérez,Norte,Licencia Enterprise,8 644.51,ABIERTA
+V0101,2026-04-14,Héctor Ramos,Bajío,Licencia Enterprise,82511.25,cerrada
+V0035,2026-02-28,Diana Pérez,Norte,Licencia Pro,81429.45,Cerrado
+V0004,06/01/2026,Héctor Ramos,Norte,Licencia Enterprise,79 035.77,Cancelado
+V0134,06/04/2026,Ana López,Occidente,Licencia Básica,8986.88,CERRADA
+V0164,2026-04-01 00:00:00,Gabriela Nava,Bajío,Licencia Pro, 69285.60 ,Cerrado
+V0087,2026-04-18,Iván Mora,Norte,Licencia Pro, 77922.15 ,Abierto
+V0179,2026-05-11,Julia Castro, Occidente ,Licencia Básica,48100.50,Cerrado
+V0102,2026-01-15,Gabriela Nava,Centro,Licencia Pro,38 346.45,CANCELADA
