@@ -226,7 +226,6 @@ Yo revisé y aprobé el plan antes de implementarlo, instalé y ejecuté el proy
 
 ## Estructura del proyecto
 
-```text
 nuwek-kpi-challenge/
 ├── app/
 │   ├── main.py                  # crea la API y maneja el error 500
@@ -242,13 +241,17 @@ nuwek-kpi-challenge/
 ├── scripts/import_ventas.py     # comando para importar el CSV
 ├── sql/schema.sql               # esquema en SQL (referencia)
 ├── data/ventas.csv
-├── tests/                       # las 19 pruebas
+├── postman/                     # colección de Postman
+├── tests/                       # las 26 pruebas
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
-```
 
-## Lo que no incluí
+## Cosas Adicionales incluidas
 
-No hice Docker ni la colección de Postman, porque eran opcionales. Tampoco puse autenticación, porque el reto no la pide. La documentación con Swagger sí está disponible en `/docs`.
+La practica esta dockerizada y con sus pruebas en postman y unitarias 
+
