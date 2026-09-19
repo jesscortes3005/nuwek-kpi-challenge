@@ -1,0 +1,20 @@
+# Secretos y configuración local: nunca deben entrar a la imagen
+.env
+
+# Entorno virtual y base de datos local
+.venv/
+venv/
+*.db
+*.sqlite
+*.sqlite3
+
+# Cachés de Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Control de versiones y editor
+.git/
+.gitignore
+.vscode/
+.idea/
