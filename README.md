@@ -224,6 +224,13 @@ Yo revisé y aprobé el plan antes de implementarlo, instalé y ejecuté el proy
 - **Vi que una rama creada en mi computadora no aparece en GitHub hasta hacer `git push`.** Antes pensé que algo estaba mal.
 - **Aprendí que revisar los datos antes de programar ahorra mucho tiempo.** Saber qué errores había en el CSV me dejó claras las reglas de limpieza antes de escribir código
 
+
+
+## Despliegue
+
+La API está desplegada en Render: https://nuwek-kpi-challenge.onrender.com/docs
+Se despliega directamente desde el `Dockerfile`, y al arrancar importa el CSV. Como uso el plan gratuito, el servicio se duerme tras unos minutos sin uso y la primera respuesta puede tardar cerca de un minuto.
+
 ## Estructura del proyecto
 
 nuwek-kpi-challenge/
