@@ -1,0 +1,259 @@
+{
+  "info": {
+    "name": "Nuwek KPI API",
+    "description": "Pruebas del endpoint GET /api/ventas/resumen. Cambia la variable base_url para probar en local, Docker o en la versión desplegada.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Resumen - todo el histórico",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('Código 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('106 ventas cerradas', function () { pm.expect(body.numero_ventas).to.eql(106); });",
+              "pm.test('Total vendido 4757842.1', function () { pm.expect(body.total_ventas).to.eql(4757842.1); });",
+              "pm.test('Hay 5 regiones y Centro va primero', function () {",
+              "    pm.expect(body.por_region).to.have.lengthOf(5);",
+              "    pm.expect(body.por_region[0].region).to.eql('Centro');",
+              "});",
+              "const totales = body.por_region.map(r => r.total);",
+              "pm.test('por_region está ordenado de mayor a menor', function () {",
+              "    pm.expect(totales).to.eql([...totales].sort((a, b) => b - a));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ]
+        },
+        "description": "Sin parámetros: todo el histórico, solo ventas cerradas."
+      }
+    },
+    {
+      "name": "2. Resumen - primer trimestre 2026",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('Código 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('48 ventas cerradas en el periodo', function () { pm.expect(body.numero_ventas).to.eql(48); });",
+              "pm.test('Total del periodo 2109299.23', function () { pm.expect(body.total_ventas).to.eql(2109299.23); });",
+              "pm.test('Sur va primero', function () { pm.expect(body.por_region[0].region).to.eql('Sur'); });",
+              "const totales = body.por_region.map(r => r.total);",
+              "pm.test('por_region está ordenado de mayor a menor', function () {",
+              "    pm.expect(totales).to.eql([...totales].sort((a, b) => b - a));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen?fecha_inicio=2026-01-01&fecha_fin=2026-03-31",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "fecha_inicio",
+              "value": "2026-01-01"
+            },
+            {
+              "key": "fecha_fin",
+              "value": "2026-03-31"
+            }
+          ]
+        },
+        "description": "Rango inclusivo en ambos extremos."
+      }
+    },
+    {
+      "name": "3. Resumen - periodo sin ventas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Código 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Respuesta en ceros', function () {",
+              "    pm.expect(pm.response.json()).to.eql({ total_ventas: 0, numero_ventas: 0, por_region: [] });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen?fecha_inicio=2030-01-01",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "fecha_inicio",
+              "value": "2030-01-01"
+            }
+          ]
+        },
+        "description": "Un periodo sin ventas no es error: responde 200 con ceros."
+      }
+    },
+    {
+      "name": "4. Error 400 - fecha_inicio inválida",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Código 400', function () { pm.response.to.have.status(400); });",
+              "pm.test('Trae un mensaje de error', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen?fecha_inicio=hola",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "fecha_inicio",
+              "value": "hola"
+            }
+          ]
+        },
+        "description": "Formato incorrecto: debe responder 400 con un mensaje claro."
+      }
+    },
+    {
+      "name": "5. Error 400 - fecha inexistente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Código 400', function () { pm.response.to.have.status(400); });",
+              "pm.test('Trae un mensaje de error', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen?fecha_fin=2026-02-30",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "fecha_fin",
+              "value": "2026-02-30"
+            }
+          ]
+        },
+        "description": "El 30 de febrero no existe en el calendario."
+      }
+    },
+    {
+      "name": "6. Error 400 - fecha_inicio posterior a fecha_fin",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Código 400', function () { pm.response.to.have.status(400); });",
+              "pm.test('Trae un mensaje de error', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/ventas/resumen?fecha_inicio=2026-06-01&fecha_fin=2026-01-01",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "ventas",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "fecha_inicio",
+              "value": "2026-06-01"
+            },
+            {
+              "key": "fecha_fin",
+              "value": "2026-01-01"
+            }
+          ]
+        },
+        "description": "Rango invertido: debe responder 400."
+      }
+    }
+  ]
+}
