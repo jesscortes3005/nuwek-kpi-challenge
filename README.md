@@ -1,54 +1,105 @@
 # nuwek-kpi-challenge
 
-API REST sencilla que limpia `ventas.csv`, lo guarda en una base de datos y expone los KPIs de ventas **cerradas**.
+Este proyecto es mi solución al reto técnico de Grupo Nuwek. Lee el archivo `ventas.csv`, lo limpia, lo guarda en una base de datos y deja una API donde se pueden consultar los KPIs de ventas cerradas.
+
+Está dividido en dos partes que solo se comunican a través de la base de datos:
+
+1. **La importación**, que se corre una sola vez: lee el CSV, lo limpia y lo guarda.
+2. **La API**, que consulta esa base de datos y responde `GET /api/ventas/resumen`.
+
+## Contenido
+
+1. [Tecnologías utilizadas](#1-tecnologías-utilizadas)
+2. [Cómo instalar el proyecto](#2-cómo-instalar-el-proyecto)
+3. [Cómo configurar la base de datos](#3-cómo-configurar-la-base-de-datos)
+4. [Cómo importar y procesar ventas.csv](#4-cómo-importar-y-procesar-ventascsv)
+5. [Cómo ejecutar la aplicación](#5-cómo-ejecutar-la-aplicación)
+6. [Cómo probar el endpoint](#6-cómo-probar-el-endpoint)
+7. [Problemas encontrados en los datos y decisiones tomadas](#7-problemas-encontrados-en-los-datos-y-decisiones-tomadas)
+8. [Cómo manejaría una API Key](#8-cómo-manejaría-una-api-key)
+9. [Cómo integraría la solución con un SaaS](#9-cómo-integraría-la-solución-con-un-saas)
+10. [Herramientas de IA utilizadas](#10-herramientas-de-ia-utilizadas)
+
+---
 
 ## 1. Tecnologías utilizadas
 
-| Necesidad | Tecnología | Motivo |
-|---|---|---|
-| Lenguaje | Python 3.11+ | Ideal para limpieza y analisis de  datos |
-| API | FastAPI + Uvicorn | Un endpoint  corto y facil de usar  y Swagger viene incluido en `/docs` |
-| Base de datos | SQLite | No requiere instalar nada. Cambiar a PostgreSQL es solo cambiar `DATABASE_URL` |
-| Acceso a datos | SQLAlchemy 2.0 | Funciona igual con SQLite o PostgreSQL |
-| Procesamiento CSV | `csv` + `decimal` (librería estándar) | 218 filas no justifican pandas, y `Decimal` evita errores de float en dinero |
-| Configuración | python-dotenv (`.env`) | Secretos fuera del código |
-| Pruebas | pytest + httpx | Pruebas de limpieza, validaciones y endpoint |
+- **Python 3.11 o superior.** Es con el que me siento más cómoda para trabajar con datos.
+- **FastAPI y Uvicorn** para la API. Con pocas líneas queda el endpoint y además genera solo una página de documentación (`/docs`) donde se puede probar.
+- **SQLite** como base de datos. No hay que instalar nada, y si algún día se quiere usar PostgreSQL basta con cambiar una variable en el `.env`.
+- **SQLAlchemy** para hablar con la base de datos desde Python.
+- **`csv` y `decimal`** de la librería estándar para leer y limpiar el archivo. Son solo 218 filas, así que no vi necesario usar pandas. Usé `Decimal` para los montos porque con dinero prefiero evitar los errores de redondeo de los decimales normales.
+- **python-dotenv** para leer la configuración del archivo `.env`.
+- **pytest** para las pruebas.
 
-## 2. Instalación
+## 2. Cómo instalar el proyecto
 
-Requisitos: Python 3.11 o superior y Git.
+Necesitas tener instalados Python 3.11 o superior y Git.
+
+Primero clona el repositorio y entra a la carpeta:
 
 ```bash
 git clone https://github.com/jesscortes3005/nuwek-kpi-challenge.git
 cd nuwek-kpi-challenge
-
-python -m venv .venv
-source .venv/bin/activate          # Windows (PowerShell): .venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-
-cp .env.example .env               # Windows: copy .env.example .env
 ```
 
-## 3. Configuración de la base de datos
+Luego crea un entorno virtual, actívalo e instala las librerías.
 
-Por defecto usa **SQLite**: no hay que instalar ni configurar nada. El archivo `ventas.db` y la tabla `ventas`
-se crean automáticamente al importar los datos (paso 4). La variable `DATABASE_URL` se define en `.env`:
+En Linux o macOS:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+En Windows (PowerShell):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+copy .env.example .env
+```
+
+Si PowerShell no te deja activar el entorno, ejecuta una vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` y vuelve a intentarlo. Cuando el entorno está activo, aparece `(.venv)` al inicio de la línea de la terminal.
+
+## 3. Cómo configurar la base de datos
+
+No hay que configurar nada. Uso SQLite, así que el archivo `ventas.db` y la tabla `ventas` se crean solos cuando se importan los datos (paso 4). La ruta de la base de datos está en el archivo `.env`:
 
 ```
 DATABASE_URL=sqlite:///./ventas.db
 ```
 
-El esquema equivalente en SQL está en `sql/schema.sql` (solo como referencia; no es necesario ejecutarlo).
-Tabla `ventas`: `id_venta` (PK), `fecha`, `vendedor` (acepta NULL), `region`, `producto`, `monto` (≥ 0), `estatus`
-(`cerrada`, `abierta` o `cancelada`), más un índice `(estatus, fecha)`.
+La tabla `ventas` tiene estas columnas:
 
-## 4. Importar y procesar `ventas.csv`
+- `id_venta`: es la clave primaria, por eso no puede haber dos ventas con el mismo id.
+- `fecha`: en formato `YYYY-MM-DD`.
+- `vendedor`: puede quedar vacío.
+- `region`: obligatoria.
+- `producto`: puede quedar vacío.
+- `monto`: número que no puede ser negativo.
+- `estatus`: solo `cerrada`, `abierta` o `cancelada`.
+
+También agregué un índice sobre `estatus` y `fecha`, porque son los campos que usa la consulta principal. En `sql/schema.sql` está el mismo esquema escrito en SQL, solo como referencia (no hace falta ejecutarlo).
+
+## 4. Cómo importar y procesar ventas.csv
 
 ```bash
 python -m scripts.import_ventas
 ```
 
-Lee `data/ventas.csv` (UTF-8), normaliza, descarta filas inválidas, elimina duplicados, guarda en la BD y muestra un reporte:
+El script hace esto, en este orden:
+
+1. Lee `data/ventas.csv` como UTF-8.
+2. Normaliza cada campo (fechas, montos, región y estatus).
+3. Descarta las filas inválidas.
+4. Elimina los duplicados.
+5. Guarda lo que queda en la base de datos.
+
+Al terminar imprime un reporte. Con el archivo del reto debe salir así:
 
 ```
 Registros originales:          218
@@ -61,30 +112,36 @@ Duplicados eliminados:         18
 Registros insertados:          185
 ```
 
-El script es **idempotente**: se puede ejecutar varias veces y siempre deja 185 filas (vacía la tabla antes de cargar).
+Se puede correr varias veces sin problema: antes de guardar vacía la tabla, así que siempre quedan 185 filas.
 
-## 5. Ejecutar la aplicación
+## 5. Cómo ejecutar la aplicación
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-La API queda en `http://127.0.0.1:8000` y la documentación interactiva (Swagger) en `http://127.0.0.1:8000/docs`.
+La API queda en `http://127.0.0.1:8000` y la documentación con la que se puede probar en `http://127.0.0.1:8000/docs`. Para detener el servidor, `Ctrl+C`.
 
-## 6. Probar el endpoint
+Importante: hay que haber hecho antes la importación del paso 4. Si no, la base de datos estará vacía.
+
+## 6. Cómo probar el endpoint
+
+El endpoint es `GET /api/ventas/resumen`. Acepta dos parámetros opcionales, `fecha_inicio` y `fecha_fin`, en formato `YYYY-MM-DD`. Los dos extremos están incluidos, y si no se manda ninguno se calcula todo el histórico. Solo se cuentan las ventas con estatus cerrada.
 
 ```bash
 # Todo el histórico
 curl "http://127.0.0.1:8000/api/ventas/resumen"
 
-# Con periodo (rango inclusivo en ambos extremos)
+# Con un periodo
 curl "http://127.0.0.1:8000/api/ventas/resumen?fecha_inicio=2026-01-01&fecha_fin=2026-03-31"
 
-# Error 400: parámetro inválido
+# Con una fecha inválida (responde error 400)
 curl -i "http://127.0.0.1:8000/api/ventas/resumen?fecha_inicio=hola"
 ```
 
-Respuesta del histórico completo (solo ventas cerradas):
+En Windows PowerShell, `curl` es un alias de otro comando y puede fallar. Ahí conviene usar `curl.exe`, o simplemente abrir la URL en el navegador.
+
+Con todo el histórico, la respuesta es esta:
 
 ```json
 {
@@ -100,13 +157,13 @@ Respuesta del histórico completo (solo ventas cerradas):
 }
 ```
 
-| Situación | Respuesta |
-|---|---|
-| Periodo sin ventas | `200` → `{"total_ventas": 0, "numero_ventas": 0, "por_region": []}` |
-| `fecha_inicio=hola`, fecha inexistente (`2026-02-30`) o `fecha_inicio` > `fecha_fin` | `400` → `{"error": "mensaje claro"}` |
-| Error interno | `500` → `{"error": "Error interno del servidor."}` (sin detalles; la traza queda solo en el log del servidor) |
+Otros casos:
 
-**Pruebas automatizadas:**
+- **Un periodo sin ventas:** responde 200 con `{"total_ventas": 0, "numero_ventas": 0, "por_region": []}`.
+- **Una fecha inválida** (`hola`, `2026-02-30`) o una `fecha_inicio` posterior a `fecha_fin`: responde 400 con un mensaje que explica el problema.
+- **Un error interno:** responde 500 con un mensaje genérico. Los detalles solo se guardan en el log del servidor, para no mostrar contraseñas ni datos de conexión.
+
+Para correr las pruebas automáticas (son 19):
 
 ```bash
 pytest -v
@@ -114,79 +171,84 @@ pytest -v
 
 ## 7. Problemas encontrados en los datos y decisiones tomadas
 
-El archivo tiene 218 filas y 200 `id_venta` únicos. Se aplicaron las reglas del reto tal cual, en este orden: normalizar → descartar inválidas → deduplicar.
+Lo primero fue revisar el CSV antes de escribir código. Tiene 218 filas y 200 ids distintos, con bastantes errores puestos a propósito. Apliqué las reglas del reto tal cual, y en este orden: primero normalizar, luego descartar lo inválido y al final quitar duplicados.
 
-| Problema | Ejemplo | Solución |
-|---|---|---|
-| Fechas en 4 formatos | `2026-03-04`, `2026-03-04 00:00:00`, `04-03-2026`, `04/03/2026` | Los dos primeros son año-mes-día (hora ignorada). Los otros dos son día-mes-año. |
-| Fechas inválidas (6) | `2026-13-45`, `0000-00-00`, vacía, `ayer`, `31/02/2026`, `2026/02/30` | Se valida con `strptime` (rechaza días inexistentes). La fila se descarta. |
-| Montos en 6 formatos | `60,901.75`, `$82,482.90`, `72 760.95`, `54608,19` | Se quitan `$` y espacios. Con coma y punto, la coma es de miles. Con solo coma, es el decimal. |
-| Montos inválidos (5) | `abc`, `N/A`, vacíos, `-3500.00` | La fila se descarta. |
-| Región con 21 variantes | ` Bajío `, `BAJÍO`, `norte` | `strip()` + `capitalize()` → 5 regiones. |
-| Región vacía (4) | | La fila se descarta. |
-| Estatus con 15 variantes | `Cerrado`, `  cerrada  `, `CANCELADA` | Minúsculas, sin espacios y se unifica género (`cerrado` = `cerrada`). |
-| Duplicados (18) | `V0089` con `2026-06-10` y `10-06-2026` | Tras normalizar son idénticos; se conserva la primera aparición. Ninguna pareja era contradictoria. |
-| Vendedor vacío (3) | | Se conserva y se guarda como `NULL`. |
-| Codificación | Acentos (Bajío, Efraín) | Se lee como UTF-8 y no hubo problemas de mojibake. |
+- **Fechas en cuatro formatos** (`2026-03-04`, `2026-03-04 00:00:00`, `04-03-2026` y `04/03/2026`). Los dos primeros son año-mes-día y los otros dos día-mes-año, así que `04-03-2026` es el 4 de marzo. Reconozco cada formato y valido con `strptime` que el día exista.
+- **Seis fechas inválidas**, como `2026-13-45`, `0000-00-00`, `ayer`, `31/02/2026` o una vacía. Esas filas se descartan.
+- **Montos en seis formatos** (`60,901.75`, `$82,482.90`, `72 760.95`, `54608,19`, entre otros). Quito el `$` y los espacios. Si tiene coma y punto, la coma es de miles; si solo tiene coma, es el decimal.
+- **Cinco montos inválidos** (`abc`, `N/A`, vacíos y uno negativo, `-3500.00`). Esas filas se descartan.
+- **La región estaba escrita de 21 formas distintas** (` Bajío `, `BAJÍO`, `norte`...). Con `strip()` y `capitalize()` quedan las 5 regiones reales: Norte, Sur, Centro, Occidente y Bajío. Cuatro filas no tenían región y se descartaron.
+- **El estatus tenía 15 variantes** (`Cerrado`, `  cerrada  `, `CANCELADA`...). Lo paso a minúsculas, quito espacios y trato `cerrado` y `cerrada` como lo mismo (igual con abierta y cancelada).
+- **18 duplicados.** Eran el mismo `id_venta` escrito con otro formato (por ejemplo, `V0089` con `2026-06-10` y con `10-06-2026`). Una vez normalizados son idénticos, así que dejo la primera aparición. Comprobé que ninguna pareja se contradecía.
+- **Tres filas sin vendedor.** Las conservo y guardo el vendedor como vacío, porque no afecta los KPIs.
+- **Acentos.** Se leen bien como UTF-8, no hubo problemas de codificación.
 
-Decisiones adicionales:
+Al final quedaron **185 filas**: 106 cerradas, 45 abiertas y 34 canceladas.
 
-- `producto` acepta NULL, porque el reto no define una regla de descarte para él (en el archivo nunca está vacío).
-- Una fila con `id_venta` vacío o estatus desconocido se descartaría (protege la clave primaria y el CHECK), aunque en este archivo no ocurre.
-- Los parámetros de fecha llegan como texto y se validan manualmente porque FastAPI responde 422 por defecto y el reto pide 400.
-- Los montos se procesan con `Decimal`, y se guardan y devuelven redondeados a 2 decimales.
+Algunas decisiones que tomé por mi cuenta:
 
-**Resultado final:** 185 filas guardadas (106 cerradas, 45 abiertas, 34 canceladas).
+- Dejé que `producto` pueda quedar vacío, porque el reto no dice qué hacer en ese caso (en este archivo nunca viene vacío).
+- Si una fila llegara sin `id_venta` o con un estatus desconocido, también se descartaría. Aquí no pasa, pero protege a la base de datos.
+- Las fechas del endpoint las valido yo, porque FastAPI responde con error 422 por defecto y el reto pide 400.
 
 ## 8. Cómo manejaría una API Key
 
-- **Dónde SÍ:** en una variable de entorno. En desarrollo, en el archivo `.env` local (que está en `.gitignore`); en producción, en un gestor de secretos (por ejemplo los secrets del servicio de despliegue o de GitHub Actions). El código la lee con `os.getenv("API_KEY")`.
-- **Dónde NO:** en el código fuente, en el repositorio (ni en commits antiguos), en `README`, `.env.example` con valor real, logs, mensajes de error, ni en el frontend o URLs.
-- Se sube `.env.example` con un valor falso de ejemplo. Si una clave llegara a filtrarse, se **revoca y se rota** de inmediato, porque borrar el commit no basta.
+La guardaría en una variable de entorno. En mi computadora, en el archivo `.env`, que está en el `.gitignore` para que nunca se suba a GitHub. En un servidor real, usaría el sistema de secretos del servicio donde se despliegue. El código la leería con `os.getenv("API_KEY")`.
+
+No la pondría dentro del código, ni en el repositorio (tampoco en commits viejos), ni en el README, ni en los logs o mensajes de error. En `.env.example` solo dejaría un valor de ejemplo falso, para que se sepa que la variable existe.
+
+Si alguna vez se llegara a subir por error, no basta con borrar el commit: hay que revocar la clave y generar una nueva.
 
 ## 9. Cómo integraría la solución con un SaaS
 
-1. No escribiría nunca en la base de datos del SaaS; solo usaría su API oficial o una réplica de solo lectura.
-2. Crearía en el SaaS una credencial dedicada con permisos mínimos (solo lectura).
-3. Guardaría esa credencial (API_KEY) en variables de entorno o en un gestor de secretos.
-4. Toda la comunicación iría por HTTPS.
-5. Un proceso programado (ETL) leería los datos del SaaS y los cargaría en la BD de esta API.
-6. Añadiría reintentos, límites de tasa y logs, para no saturar al SaaS.
-7. Esta API seguiría siendo de solo lectura y separada del SaaS.
-8. Si el SaaS ofrece webhooks, los usaría para actualizar solo lo que cambia.
-9. Probaría primero en un entorno de pruebas.
-10. Con esto, si mi API falla, el SaaS sigue operando sin cambios.
+1. No escribiría nada directamente en la base de datos del SaaS, porque podría afectar lo que ya está funcionando.
+2. Usaría su API oficial, o una réplica de solo lectura si existe.
+3. Pediría una credencial exclusiva para esta integración, con permisos solo de lectura.
+4. Esa credencial iría en variables de entorno, nunca en el código.
+5. Toda la comunicación sería por HTTPS.
+6. Un proceso programado leería los datos del SaaS y los copiaría a la base de datos de esta API.
+7. Pondría reintentos, límites de peticiones y registros, para no saturar al SaaS.
+8. Lo probaría primero en un ambiente de pruebas. Así, si mi API falla, el SaaS sigue funcionando igual.
 
 ## 10. Herramientas de IA utilizadas
 
-- Usé Claude como asistente para analizar el enunciado y el CSV, proponer la arquitectura y generar el código, las pruebas y el borrador del README. Yo revisé y aprobé el plan, instalé y ejecuté el proyecto, corrí las pruebas, validé la API contra los resultados esperados y armé el repositorio y el Pull Request.
+Usé **Claude** como asistente. Me ayudó a analizar el enunciado y el CSV, a proponer la arquitectura y a generar el código, las pruebas y el borrador de este README.
+
+Yo revisé y aprobé el plan antes de implementarlo, instalé y ejecuté el proyecto, corrí las pruebas, comprobé la API contra los resultados esperados (106 ventas cerradas, el filtro por fechas, un periodo sin ventas y los errores 400) y armé el repositorio y el Pull Request.
+
+---
+
+## Dificultades y aprendizajes
+
+- **Trabajar con la terminal en Windows me costó al principio.** Tuve problemas para activar el entorno virtual en PowerShell: primero por escribir mal la ruta y luego porque estaba parada en una carpeta distinta a la del proyecto. Además, tenía el proyecto dentro de otra carpeta con el mismo nombre, y eso me confundió un rato.
+- **Vi que una rama creada en mi computadora no aparece en GitHub hasta hacer `git push`.** Antes pensé que algo estaba mal.
+- **Aprendí que revisar los datos antes de programar ahorra mucho tiempo.** Saber qué errores había en el CSV me dejó claras las reglas de limpieza antes de escribir código
 
 ## Estructura del proyecto
 
 ```text
 nuwek-kpi-challenge/
 ├── app/
-│   ├── main.py            # FastAPI + manejador de error 500
-│   ├── config.py          # lee .env
-│   ├── database.py        # engine y sesión
-│   ├── models.py          # modelo Venta
-│   ├── validators.py      # validación de fecha_inicio / fecha_fin
-│   ├── api/ventas.py      # GET /api/ventas/resumen
-│   ├── services/kpi_service.py   # consultas de KPIs
+│   ├── main.py                  # crea la API y maneja el error 500
+│   ├── config.py                # lee el .env
+│   ├── database.py              # conexión a la base de datos
+│   ├── models.py                # la tabla ventas
+│   ├── validators.py            # valida fecha_inicio y fecha_fin
+│   ├── api/ventas.py            # el endpoint /api/ventas/resumen
+│   ├── services/kpi_service.py  # las consultas de los KPIs
 │   └── etl/
-│       ├── cleaning.py    # reglas de limpieza
-│       └── importer.py    # lee, limpia, deduplica, guarda, reporta
-├── scripts/import_ventas.py
-├── sql/schema.sql
+│       ├── cleaning.py          # reglas de limpieza
+│       └── importer.py          # lee, limpia, quita duplicados y guarda
+├── scripts/import_ventas.py     # comando para importar el CSV
+├── sql/schema.sql               # esquema en SQL (referencia)
 ├── data/ventas.csv
-├── tests/
+├── tests/                       # las 19 pruebas
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-## Qué faltó / limitaciones
+## Lo que no incluí
 
-- No incluí Docker ni colección de Postman. Swagger sí está disponible en `/docs`.
-- No hay autenticación, porque el reto no la pide.
+No hice Docker ni la colección de Postman, porque eran opcionales. Tampoco puse autenticación, porque el reto no la pide. La documentación con Swagger sí está disponible en `/docs`.
